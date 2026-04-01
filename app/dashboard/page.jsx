@@ -187,7 +187,7 @@ export default function Dashboard() {
               <div className="text-gray-400 text-sm">Current Draw Month</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-yellow-400 mb-1">£0</div>
+              <div className="text-3xl font-bold text-yellow-400 mb-1">₹0</div>
               <div className="text-gray-400 text-sm">Total Winnings</div>
             </div>
           </div>
