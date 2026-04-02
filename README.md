@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⛳ GolfGive
 
-## Getting Started
+A full-stack web platform where golfers can subscribe, enter their scores, support charities, and participate in monthly prize draws. Built this to combine two things I like — web dev and doing something useful.
 
-First, run the development server:
+**Live demo:** [your-vercel-url.vercel.app](https://your-vercel-url.vercel.app)
+
+---
+
+## What it does
+
+- Users sign up and choose a subscription plan (monthly/yearly)
+- A portion of every subscription goes to a charity of their choice
+- Players log their last 5 Stableford golf scores
+- Every month there's a prize draw — better scores = more entries
+- Prize pool splits: 40% jackpot (5 matches), 35% second (4), 25% third (3)
+- Built-in AI chatbot that answers questions about the platform
+
+---
+
+## Tech stack
+
+| Area | Tech |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Database + Auth | Supabase (PostgreSQL + Row Level Security) |
+| Styling | Tailwind CSS |
+| AI Chatbot | Groq API (Llama 3.1 8B) |
+| Animations | Framer Motion |
+| Deployment | Vercel |
+
+---
+
+## Features I'm proud of
+
+**AI chatbot** — floating widget on every page, answers questions about subscriptions, scores, donations. Uses Groq's free Llama 3.1 model. Chat history saved per user in Supabase.
+
+**Auth + protected routes** — Supabase handles signup/login. Dashboard redirects if you're not subscribed yet.
+
+**Score system** — keeps only your last 5 scores, auto-removes oldest when you add a new one.
+
+**RLS policies** — database rows are locked to the user who owns them, even if someone hits the API directly.
+
+---
+
+## Running locally
+
+```bash
+git clone https://github.com/yourusername/golf-charity-platform
+cd golf-charity-platform
+npm install
+```
+
+Create a `.env.local` file:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+GROQ_API_KEY=your_groq_api_key
+```
+
+Then:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Database setup
 
-## Learn More
+Run the SQL files in `supabase/migrations/` in your Supabase SQL editor, in order. Creates tables for `profiles`, `scores`, `charities`, `chat_history` with proper RLS.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Folder structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+app/
+├── api/
+│   └── chat/          # AI chatbot API route
+├── auth/              # Login + signup pages
+├── components/        # ChatWidget
+├── dashboard/         # Main user dashboard
+├── charities/         # Charity listing
+├── subscribe/         # Subscription flow
+└── lib/
+    └── supabase.js    # Supabase client
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Things I'd add with more time
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Stripe integration for actual payments
+- Admin dashboard to manage draws and winners
+- Email notifications when draw results are announced
+- Mobile app (React Native maybe)
+
+---
+
+## Why I built this
+
+Started as a side project idea — most charity platforms feel boring and disconnected. Wanted to make giving feel more engaging by tying it to something competitive. Golf was a good fit since it already has a scoring system built in.
