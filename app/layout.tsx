@@ -1,5 +1,6 @@
 import { Geist } from 'next/font/google'
 import './globals.css'
+import ChatWidget from './components/ChatWidget'
 
 const geist = Geist({ subsets: ['latin'] })
 
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={geist.className}>
         {children}
+        <ChatWidget />
       </body>
     </html>
   )
