@@ -23,6 +23,7 @@ export default function Dashboard() {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) { router.push('/auth/login'); return }
     setUser(user)
+    console.log('user loaded:', user.email)
 
     const { data: profile } = await supabase.from('profiles').select('*').eq('id', user.id).single()
     if (!profile) { router.push('/subscribe'); return }
@@ -30,6 +31,7 @@ export default function Dashboard() {
 
     const { data: scores } = await supabase.from('scores').select('*').eq('user_id', user.id).order('date', { ascending: false })
     setScores(scores || [])
+    console.log('scores:', scores)
 
     const { data: charities } = await supabase.from('charities').select('*')
     setCharities(charities || [])
