@@ -2,7 +2,7 @@
 
 A full-stack web platform where golfers can subscribe, enter their scores, support charities, and participate in monthly prize draws. Built this to combine two things I like — web dev and doing something useful.
 
-**Live demo:** [your-vercel-url.vercel.app](https://your-vercel-url.vercel.app)
+**Live demo:** [your-vercel-url.vercel.app]https://golf-charity-platform-phi-two.vercel.app/
 
 ---
 
